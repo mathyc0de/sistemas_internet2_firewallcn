@@ -1,0 +1,109 @@
+<!--
+  Arquivo gerado integralmente — redesign da camada visual (UI/UX).
+  Página inicial estilo portal de busca. Contrato preservado: form method="get", input name="url".
+  Estilos em static/style.css. Lógica de negócio inalterada (proxy.py).
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Web — Proxy Institucional</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      body.page-home::before {
+        background-image: url("{{ url_for('static', filename='china_flag.svg') }}");
+      }
+    </style>
+</head>
+<body class="page-home">
+    <div class="page-home__decor" id="home-decor" aria-hidden="true"></div>
+
+    <main class="page page--centered">
+        <header class="brand">
+            <div class="brand__logo" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+            </div>
+            <h1 class="brand__title">Portal Web</h1>
+            <p class="brand__subtitle">Digite o endereço de um site para navegar com segurança pela rede.</p>
+        </header>
+
+        <form class="search-form" method="get" role="search">
+            <label class="search-form__label" for="url">Digite o endereço do site</label>
+            <div class="search-bar">
+                <span class="search-bar__icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.3-4.3"/>
+                    </svg>
+                </span>
+                <input
+                    class="search-bar__input"
+                    id="url"
+                    name="url"
+                    type="text"
+                    inputmode="url"
+                    autocomplete="url"
+                    placeholder="https://www.exemplo.com"
+                    autofocus
+                    required
+                >
+            </div>
+            <div class="search-form__actions">
+                <button class="btn btn--primary" type="submit">Acessar</button>
+            </div>
+        </form>
+
+        <p class="page-footer">Acesso não monitorado e totalmente livre de censura</p>
+    </main>
+
+    <script>
+      (function () {
+        const decor = document.getElementById("home-decor");
+        if (!decor) return;
+
+        const placements = [
+          {
+            src: "{{ url_for('static', filename='xi_jinping.jpg') }}",
+            corner: "tl",
+            size: 110,
+            rotate: -8,
+          },
+          {
+            src: "{{ url_for('static', filename='emoji.png') }}",
+            corner: "tr",
+            size: 80,
+            rotate: 10,
+          },
+          {
+            src: "{{ url_for('static', filename='emoji.png') }}",
+            corner: "bl",
+            size: 76,
+            rotate: -12,
+          },
+          {
+            src: "{{ url_for('static', filename='xi_jinping.jpg') }}",
+            corner: "br",
+            size: 105,
+            rotate: 6,
+          },
+        ];
+
+        placements.forEach(function (item) {
+          const img = document.createElement("img");
+          img.src = item.src;
+          img.alt = "";
+          img.className = "page-home__float page-home__float--" + item.corner;
+          img.loading = "lazy";
+          img.decoding = "async";
+          img.style.width = item.size + "px";
+          img.style.transform = "rotate(" + item.rotate + "deg)";
+          decor.appendChild(img);
+        });
+      })();
+    </script>
+</body>
+</html>

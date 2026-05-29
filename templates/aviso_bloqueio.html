@@ -1,0 +1,44 @@
+<!--
+  Arquivo gerado integralmente — redesign da camada visual (UI/UX).
+  Página de aviso de bloqueio (HTTP 403). Exibe {{ url }} e static/blocked.gif.
+  Estilos compartilhados em static/style.css. Lógica de negócio inalterada.
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso bloqueado — Portal Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page page--centered">
+        <article class="block-card" role="alert">
+            <figure class="block-card__media">
+                <img
+                    class="block-card__gif"
+                    src="{{ url_for('static', filename='blocked.gif') }}"
+                    alt="Acesso negado — crédito social reduzido"
+                    width="480"
+                    height="270"
+                    loading="eager"
+                >
+            </figure>
+
+            <h1 class="block-card__title">Este site está bloqueado</h1>
+            <p class="block-card__message">
+                Devido às políticas de uso da rede, o endereço solicitado não pode ser acessado
+                por meio deste proxy. Entre em contato com o administrador se acreditar que
+                se trata de um erro.
+            </p>
+
+            <p class="block-card__url-label">Endereço bloqueado</p>
+            <code class="block-card__url">{{ url }}</code>
+
+            <div class="block-card__actions">
+                <a class="btn btn--primary" href="/">Voltar ao início</a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
