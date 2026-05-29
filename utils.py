@@ -14,7 +14,7 @@ def load_data() -> tuple[list, list]:
         f.close()
     
     ## Lista de xingamentos, gerado com IA
-    with open('data/palavrao.json', 'r', encoding='utf-8') as f:
+    with open('data/words.json', 'r', encoding='utf-8') as f:
         blocked_words = json.load(f)
         f.close()
     
@@ -22,9 +22,6 @@ def load_data() -> tuple[list, list]:
 
 
 def filter_domains(request: str, blocked_domains: list) -> bool:
-    """
-    Verifica se o domínio está na lista de bloqueio.
-    """
     return any(domain in request for domain in blocked_domains)
 
 def filter_curse_words(conteudo: str, blocked_words: list) -> str:
@@ -37,13 +34,3 @@ def filter_curse_words(conteudo: str, blocked_words: list) -> str:
             conteudo_modificado = re.sub(re.escape(palavra), "censurado", conteudo_modificado, flags=re.IGNORECASE)
     
     return conteudo_modificado
-
-def logger(url: str, acao: str):
-    """
-    Registra os logs do proxy
-    """
-
-    with open('log.txt', 'a', encoding='utf-8') as log:
-        timestamp = datetime.now().strftime('')
-        log.write(f"{timestamp} | {url} | {acao}\n")
-    print(f" LOG: {timestamp} | {url} | {acao}")
