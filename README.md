@@ -46,7 +46,7 @@ venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
 
-Pacotes principais: `flask`, `requests`.
+Pacotes principais: `flask`, `requests`. `gunicorn`
 
 ---
 
@@ -118,6 +118,7 @@ Abra `http://localhost:4500/` e digite a URL no campo de busca (ex.: `https://ww
 |---------|---------|
 | Query string | `http://localhost:4500/?url=https://www.python.org` |
 | Caminho | `http://localhost:4500/https://www.python.org` |
+| Logs | `http://localhost:4500/logs` |
 
 Se a URL não tiver `http://` ou `https://`, o proxy adiciona `https://` automaticamente.
 
@@ -133,6 +134,8 @@ Ações são registradas em `log.txt` e no terminal:
 - `FILTRADO` — página acessada, mas com palavras censuradas
 - `PERMITIDO` — acesso sem alterações
 
+**Visualização no navegador:** acesse **http://localhost:4500/logs** para ver o conteúdo bruto de `log.txt`. Também há um link “Ver logs” no rodapé da página inicial.
+
 ---
 
 ## Estrutura do projeto
@@ -147,7 +150,8 @@ Proxy/
 │   └── words.json         # Palavras censuradas
 ├── templates/
 │   ├── formulario.html    # Página inicial (portal de busca)
-│   └── aviso_bloqueio.html
+│   ├── aviso_bloqueio.html
+│   └── logs.html          # Visualização do log de acessos
 ├── static/
 │   ├── style.css
 │   ├── china_flag.svg

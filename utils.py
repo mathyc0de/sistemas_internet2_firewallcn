@@ -1,6 +1,8 @@
 import json
-from datetime import datetime
+import os
 import re
+
+LOG_FILE = 'log.txt'
 
 def load_data() -> tuple[list, list]:
     """
@@ -34,3 +36,12 @@ def filter_curse_words(conteudo: str, blocked_words: list) -> str:
             conteudo_modificado = re.sub(re.escape(palavra), "censurado", conteudo_modificado, flags=re.IGNORECASE)
     
     return conteudo_modificado
+
+
+def read_logs() -> str:
+    """Lê o conteúdo bruto de log.txt."""
+    if not os.path.exists(LOG_FILE):
+        return ''
+
+    with open(LOG_FILE, 'r', encoding='utf-8') as f:
+        return f.read()

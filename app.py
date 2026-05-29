@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import requests
 import re
 import logging
-from utils import filter_domains, filter_curse_words, load_data
+from utils import filter_domains, filter_curse_words, load_data, read_logs
 
 logging.basicConfig(
     level=logging.INFO,
@@ -19,6 +19,11 @@ logging.getLogger("werkzeug").setLevel(logging.ERROR) # Evita os logs desnecessa
 app = Flask(__name__)
 PORT = 4500
 BLOCKED_DOMAINS, BLOCKED_WORDS = load_data()
+
+
+@app.route('/logs')
+def view_logs():
+    return render_template('logs.html', content=read_logs())
 
 
 @app.route('/')
