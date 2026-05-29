@@ -537,17 +537,19 @@ body.page-home .page-footer {
 .error-card__media {
   margin: 0 0 var(--space-lg);
   border-radius: var(--radius-sm);
-  overflow: hidden;
+  overflow: visible;
   background: #0d1117;
+  line-height: 0;
 }
 
 .error-card__gif {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 220px;
-  object-fit: cover;
+  max-width: 100%;
+  object-fit: contain;
   object-position: center;
+  border-radius: var(--radius-sm);
 }
 
 .error-card__code {
