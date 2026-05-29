@@ -522,6 +522,89 @@ body.page-home .page-footer {
   justify-content: center;
 }
 
+/* ── Error page ── */
+.error-card {
+  width: 100%;
+  max-width: 520px;
+  padding: var(--space-2xl) var(--space-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.error-card__media {
+  margin: 0 0 var(--space-lg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #0d1117;
+}
+
+.error-card__gif {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.error-card__code {
+  display: inline-block;
+  margin: 0 0 var(--space-md);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  border-radius: 999px;
+}
+
+.error-card__title {
+  margin: 0 0 var(--space-sm);
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.error-card__message {
+  margin: 0 0 var(--space-lg);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.error-card__url-label {
+  margin: 0 0 var(--space-xs);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+.error-card__url {
+  display: block;
+  margin: 0 0 var(--space-xl);
+  padding: var(--space-sm) var(--space-md);
+  font-size: 0.875rem;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
+    Consolas, monospace;
+  word-break: break-all;
+  text-align: left;
+  color: var(--color-text);
+  background: #f8f9fa;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.error-card__actions {
+  display: flex;
+  justify-content: center;
+}
+
 /* ── Logs page ── */
 .page--logs {
   align-items: stretch;

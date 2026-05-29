@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 import requests
 import re
 import logging
@@ -19,6 +19,16 @@ logging.getLogger("werkzeug").setLevel(logging.ERROR) # Evita os logs desnecessa
 app = Flask(__name__)
 PORT = 4500
 BLOCKED_DOMAINS, BLOCKED_WORDS = load_data()
+
+
+def pagina_erro(codigo: int, titulo: str, mensagem: str, url: str | None = None):
+    return render_template(
+        'erro.html',
+        codigo=codigo,
+        titulo=titulo,
+        mensagem=mensagem,
+        url=url,
+    ), codigo
 
 
 @app.route('/logs')
@@ -57,11 +67,29 @@ def proxy(url=None):
         return filtered_content, response.status_code
     
     except requests.exceptions.Timeout:
-        return jsonify({"error": "Erro: Timeout"}), 504
+        logging.info(f"TIMEOUT: {full_url}")
+        return pagina_erro(
+            504,
+            'Tempo esgotado',
+            'O site demorou demais para responder. Tente novamente mais tarde.',
+            full_url,
+        )
     except requests.exceptions.ConnectionError:
-        return jsonify({"error": "Erro: Não conectou"}), 502
+        logging.info(f"ERRO_CONEXAO: {full_url}")
+        return pagina_erro(
+            502,
+            'Falha na conexão',
+            'Não foi possível conectar ao endereço solicitado. Verifique a URL e sua conexão.',
+            full_url,
+        )
     except Exception as e:
-        return jsonify({"error": f"Erro: {e}"}), 500
+        logging.info(f"ERRO: {full_url} — {e}")
+        return pagina_erro(
+            500,
+            'Erro interno',
+            'Ocorreu um erro inesperado ao processar a requisição.',
+            full_url,
+        )
 
 if __name__ == '__main__':
     print(" PROXY INICIADO\n")

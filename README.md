@@ -126,6 +126,18 @@ Se a URL não tiver `http://` ou `https://`, o proxy adiciona `https://` automat
 
 URLs que coincidem com `data/blocked.json` exibem a página `aviso_bloqueio.html` (HTTP 403) com o endereço bloqueado.
 
+### Erros de conexão
+
+Falhas ao buscar o site destino exibem a página `erro.html` com código HTTP correspondente:
+
+| Código | Situação |
+|--------|----------|
+| 504 | Timeout (site demorou mais de 10 s) |
+| 502 | Falha de conexão com o destino |
+| 500 | Erro inesperado no proxy |
+
+Todas incluem o botão **Voltar ao início** (`/`).
+
 ### Logs
 
 Ações são registradas em `log.txt` e no terminal:
@@ -151,6 +163,7 @@ Proxy/
 ├── templates/
 │   ├── formulario.html    # Página inicial (portal de busca)
 │   ├── aviso_bloqueio.html
+│   ├── erro.html          # Timeout, conexão e erros internos
 │   └── logs.html          # Visualização do log de acessos
 ├── static/
 │   ├── style.css
@@ -190,7 +203,7 @@ Este projeto utilizou IA (Cursor / assistente de código) nas etapas abaixo. A l
 | Formulário não abre o site | Servidor precisa estar rodando; confira se a URL inclui o protocolo ou deixe o proxy adicionar `https://` |
 | Todo site retorna bloqueio | Verifique se `filter_domains` está correto em `utils.py` e se a URL não contém acidentalmente um domínio da lista |
 | Lista não atualiza | Reinicie `python app.py` após editar os JSON |
-| Erro 502 / 504 | Site destino indisponível ou timeout (10 s) |
+| Erro 502 / 504 | Site destino indisponível ou timeout (10 s); a página de erro oferece retorno à home |
 
 ---
 

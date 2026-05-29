@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }} — Portal Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page page--centered">
+        <article class="error-card" role="alert">
+            <figure class="error-card__media">
+                <img
+                    class="error-card__gif"
+                    src="{{ url_for('static', filename='motivating.gif') }}"
+                    alt=""
+                    width="480"
+                    height="270"
+                    loading="eager"
+                >
+            </figure>
+
+            <p class="error-card__code">{{ codigo }}</p>
+
+            <h1 class="error-card__title">{{ titulo }}</h1>
+            <p class="error-card__message">{{ mensagem }}</p>
+
+            {% if url %}
+            <p class="error-card__url-label">Endereço solicitado</p>
+            <code class="error-card__url">{{ url }}</code>
+            {% endif %}
+
+            <div class="error-card__actions">
+                <a class="btn btn--primary" href="/">Voltar ao início</a>
+            </div>
+        </article>
+    </main>
+</body>
+</html>
